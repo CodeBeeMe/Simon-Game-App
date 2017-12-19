@@ -1,0 +1,120 @@
+/* !Date:19.12.2017 Copyright ©2017 CSS code by Cătălin Anghel-Ursu @Madness2aMaze (https://codepen.io/Madness2aMaze)
+- All Rights Reserved!
+
+MIT License
+
+Copyright (c) 2017 Cătălin Anghel-Ursu (https://github.com/Madness2aMaze/Tic-Tac-Toe-Web-Game)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE. */
+
+body {
+  background-color: #fff;
+  font-family: 'Audiowide', cursive;
+  user-select: none;
+}
+
+.l-circle {  
+  background-color: #fff;
+  margin: 0 auto;
+  margin-top: 200px;
+  height: 500px;
+  width: 500px;
+  border-radius: 400px;
+  overflow: hidden;
+}
+
+.s-circle {
+  position: absolute;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,1) 11%, rgba(255, 255, 255,1) 12%, rgba(255, 255, 255,1) 49%, rgba(17,17,17,1) 50%, rgba(28,28,28,1) 51%, rgba(0,0,0,1) 59%, rgba(102,102,102,1) 60%, rgba(44,44,44,1) 61%, rgba(71,71,71,1) 71%, rgba(89,89,89,1) 95%, rgba(76,76,76,1) 100%);
+  margin: 0 auto;
+  margin-left: 75px;
+  margin-top: 75px;
+  height: 350px;
+  width: 350px;
+  border-radius: 250px;
+  z-index: 5;
+}
+
+.title {
+  width: 300px;
+  font-size: 42px;
+  margin: 0 auto;
+  margin-top: 80px;
+  color: #333;
+}
+
+.wrap {
+  width: 300px;
+  margin: 0 auto;  
+}
+
+.si {
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.mon {
+  transform: scale(1.05, 1.4);
+  letter-spacing: 0px;
+  line-height: 60px;
+  
+}
+
+.pad {
+  border: 14px #fff solid;
+  margin: 0px;
+  float: left;
+  z-index: 1;
+  width: 249px;
+  height: 249px;
+  opacity: 1;
+  transition: .5s;
+  /*box-shadow: inset 0px 0px 50px -5px rgba(0, 0, 0, 0.75);*/
+}
+
+.pad:hover {
+  width: 249px;
+  height: 249px;
+  opacity: 1;
+  transition: .5s;
+}
+
+.green {
+  border-radius: 400px 0px 0px 0px;
+  float: left;
+  background: linear-gradient(135deg, rgba(210,255,82,1) 0%, rgba(210,255,82,1) 50.5%, rgba(145,232,66,1) 50.5%, rgba(210,255,82,1) 100%); 
+}
+
+.red {
+  border-radius: 0px 400px 0px 0px;
+  float: left;
+  background: linear-gradient(45deg, rgba(241,111,92,1) 0%, rgba(246,41,12,1) 50%, rgba(241,111,92,1) 50%, rgba(248,80,50,1) 100%);
+}
+
+.yellow {
+  border-radius: 0px 0px 400px 0px;
+  float: left;
+  background: linear-gradient(135deg, rgba(251,223,147,1) 0%, rgba(248,181,0,1) 50%, rgba(252,205,77,1) 50%, rgba(252,234,187,1) 100%);
+}
+
+.blue {
+  border-radius: 0px 0px 0px 400px;
+  float: left;
+  background: linear-gradient(45deg, rgba(183,222,237,1) 0%, rgba(113,206,239,1) 50%, rgba(33,180,226,1) 50%, rgba(183,222,237,1) 100%);
+}
