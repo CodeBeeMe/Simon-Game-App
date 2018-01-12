@@ -24,37 +24,49 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
 $(document).ready(function() {
-  var uiDisplay = $(".display"),
+  var uiPlayBox = $(".play-box"),
       uiCenter = $(".s-circle"),
+      uiDisplay = $(".display"),
       uiOuter = $(".l-circle"),
       uiSwitch = $(".switch"),
       uiStrict = $(".strict"),
       uiFooter = $(".footer"),
-      uiPlayBox = $(".play-box"),
-      uiPlay = $(".play"),
-      uiStart = $(".start"),      
+      uiStart = $(".start"),
       uiLevel = $(".level"),
-      uiOnOff = $(".knob"),
       uiGreen = $(".green"),
       uiYlow = $(".yellow"),
+      index = [0, 1, 2, 3],
+      uiOnOff = $(".knob"),
+      uiPlay = $(".play"),
       uiBlue = $(".blue"),
       uiRed = $(".red"),
       strict = false,
+      pushedPads = [],
+      collector = [],
+      pads = {
+        "0": "#0",
+        "1": "#1",
+        "2": "#2",
+        "3": "#3"
+      },
       on = false,
       level = 1;
 
   level = level < 10 ? "0" + level : level;
 
-  uiPlay.addClass("color-me"); //add a 4 color animation on the play button
+  uiPlay.addClass("color-me"); //adds a 4 color animation on the play button
+  uiPlayBox.addClass("color-border"); //adds a 4 color animation on the play-box border
 
   //starts the game wich in turn starts a couple of animations
   uiPlay.click(function() {
+    uiPlayBox.css("transform", "scale(1.2, 1.2)");
+    uiPlayBox.css("opacity", ".5");
     uiPlay.css("transform", "scale(1.2, 1.2)");
-    uiPlay.css("opacity", ".5");    
+    uiPlay.css("opacity", ".5");
 
     setTimeout(function() {
       uiPlayBox.css("display", "none");
-      uiOuter.css("display", "block");      
+      uiOuter.css("display", "block");
     }, 100);
 
     setTimeout(function() {
@@ -82,7 +94,7 @@ $(document).ready(function() {
     }, 1000);
 
     setTimeout(function() {
-      uiOuter.css("box-shadow", "inset 0px 0px 50px -20px rgba(0, 0, 0, 1)");
+      uiOuter.css("box-shadow", "inset 0px 0px 75px 10px rgba(0, 0, 0, 1)");
     }, 1500);
   });
 
@@ -96,8 +108,8 @@ $(document).ready(function() {
       strict = true;
     }
   });
-  
-  function toggleOffToOn() {
+
+  function toggleOffToOn() { //switching the game ON
     on = true;
     strict = true;
     uiLevel.html("..");
@@ -114,10 +126,10 @@ $(document).ready(function() {
         uiLevel.html(level);
       });
     }
-    $(this).one("click", toggleOnToOff);    
+    $(this).one("click", toggleOnToOff);
   }
-  
-  function toggleOnToOff() {
+
+  function toggleOnToOff() { //switching the game OFF
     on = false;
     strict = false;
     pushedPads = [];
@@ -131,14 +143,41 @@ $(document).ready(function() {
     $(this).one("click", toggleOffToOn);
   }
   uiSwitch.one("click", toggleOffToOn);
+  
+  // the randomizer function that generates random numbers from a range
+  function randomizer(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  uiStart.click(function() {
+    collector.push(randomizer(0, 3));
+    console.log(collector);
+    
+    // a loop that controls the way the colored pads are highlighted during the random sequence
+    $.each(collector, function(i) {
+      setTimeout(function() {
+        var padId = "#" + collector[i];
+        console.log(padId);
+        uiOuter.css("box-shadow", "none");
+        $(padId).addClass("selected");
+        setTimeout(function() {
+          $(padId).removeClass("selected");
+        }, 300);
+      }, 1000);
+    });
+  });
+
+  // looping through pads based on id
+  $.each(index, function(i) {
+    var uiPads = $(pads[i]);
+
+    uiPads.click(function() {
+      if (on) {
+        pushedPads.push(uiPads.html());
+        console.log(pushedPads);
+        uiOuter.css("box-shadow", "inset 0px 0px 75px 10px rgba(0, 0, 0, 1)");
+      }
+    });
+  });
 
   
-});
-
-var pushedPads = [];
-function userInput(el) {
-  pushedPads.push(el);
-  console.log(pushedPads);
-}
-
-
