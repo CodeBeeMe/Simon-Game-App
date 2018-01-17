@@ -1,9 +1,9 @@
-/* !Date: 19.12.2017 Copyright ©2017 JavaScript Code by Cătălin Anghel-Ursu @Madness2aMaze (https://codepen.io/Madness2aMaze)
+/* !Date: 19.12.2017 Copyright ©2017-2018 JavaScript Code by Cătălin Anghel-Ursu @Madness2aMaze (https://codepen.io/Madness2aMaze)
 - All Rights Reserved!
 
 MIT License
 
-Copyright (c) 2017 Cătălin Anghel-Ursu (https://github.com/Madness2aMaze/Tic-Tac-Toe-Web-Game)
+Copyright (c) 2017-2018 Cătălin Anghel-Ursu (https://github.com/Madness2aMaze/Simon-Game-App)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -40,9 +40,12 @@ $(document).ready(function() {
       uiPlay = $(".play"),
       uiBlue = $(".blue"),
       uiRed = $(".red"),
+      uiPad = $(".pad"),
+      userCollector = [],
+      aiCollector = [],
       strict = false,
-      pushedPads = [],
-      collector = [],
+      aiPick = "",
+      userPick = "",
       pads = {
         "0": "#0",
         "1": "#1",
@@ -50,9 +53,7 @@ $(document).ready(function() {
         "3": "#3"
       },
       on = false,
-      level = 1;
-
-  level = level < 10 ? "0" + level : level;
+      level = 0;
 
   uiPlay.addClass("color-me"); //adds a 4 color animation on the play button
   uiPlayBox.addClass("color-border"); //adds a 4 color animation on the play-box border
@@ -100,84 +101,126 @@ $(document).ready(function() {
 
   //function for checking if the strict mode is on or off
   uiStrict.click(function isStrict() {
-    if (strict) {
+    if (on) {
+      if (strict) {
       uiStrict.addClass("str-on");
       strict = false;
-    } else {
+      } else {
       uiStrict.removeClass("str-on");
       strict = true;
+      }
     }
   });
 
-  function toggleOffToOn() { //switching the game ON
+  function reset() {
+    level = 0;
+    on = false;
+    strict = false;
+    collector = [];
+    pushedPads = [];
+    uiLevel.html("00");
+    uiOnOff.addClass("slide-l");
+    uiOnOff.removeClass("slide-r");
+    uiLevel.removeClass("zoom-in");
+    uiStrict.removeClass("str-on");
+    uiPad.css("cursor", "default");
+    uiDisplay.addClass("invisible");
+    uiSwitch.css("background", "#f44242");
+  }
+
+  function toggleOffToOn() {
+    //switching the game ON
     on = true;
     strict = true;
-    uiLevel.html("..");
+    uiLevel.text();
+    collector = [];
     pushedPads = [];
-    uiLevel.removeClass("zoom-in");
-    uiSwitch.css("background", "#91e842");
-    uiOnOff.removeClass("slide-l");
+    uiLevel.addClass("zoom-in");
     uiOnOff.addClass("slide-r");
+    uiOnOff.removeClass("slide-l");
+    setTimeout(function() {
+      uiLevel.removeClass("zoom-in");
+    }, 1000);
     uiDisplay.removeClass("invisible");
+    uiSwitch.css("background", "#91e842");
     if (on) {
-      uiStart.click(function() {
-        //level = 1;
-        uiLevel.addClass("zoom-in");
-        uiLevel.html(level);
-      });
+      uiPad.css("cursor", "pointer");
     }
     $(this).one("click", toggleOnToOff);
   }
 
-  function toggleOnToOff() { //switching the game OFF
-    on = false;
-    strict = false;
-    pushedPads = [];
-    uiLevel.html("..");
-    uiLevel.removeClass("zoom-in");
-    uiSwitch.css("background", "#f44242");
-    uiOnOff.removeClass("slide-r");
-    uiOnOff.addClass("slide-l");
-    uiDisplay.addClass("invisible");
-    uiStrict.removeClass("str-on");
+  function toggleOnToOff() {
+    //switching the game OFF
+    reset();
     $(this).one("click", toggleOffToOn);
   }
   uiSwitch.one("click", toggleOffToOn);
-  
+
   // the randomizer function that generates random numbers from a range
   function randomizer(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  uiStart.click(function() {
-    collector.push(randomizer(0, 3));
-    console.log(collector);
-    
-    // a loop that controls the way the colored pads are highlighted during the random sequence
-    $.each(collector, function(i) {
+  function startGame() {
+    if (on) {
+      level++;
+      level = level < 10 ? "0" + level : level; // if less than 10 to add a "0" in front of the number
       setTimeout(function() {
-        var padId = "#" + collector[i];
-        console.log(padId);
-        uiOuter.css("box-shadow", "none");
-        $(padId).addClass("selected");
+        uiLevel.addClass("blink");
+      }, 500);
+      setTimeout(function() {
+        uiLevel.removeClass("blink");
+      }, 1800);
+      aiCollector.push(randomizer(0, 3));
+      aiPick = aiCollector[aiCollector.length - 1];
+      console.log(aiCollector);
+      console.log(aiPick);
+
+      // a loop that controls the way the colored pads are highlighted during the random sequence
+      $.each(aiCollector, function(i) {
+        // function that flashes the coresponding pad based on the randomizer output
         setTimeout(function() {
-          $(padId).removeClass("selected");
-        }, 300);
-      }, 1000);
-    });
-  });
+          var id = aiCollector[i],
+              uiPads = $(pads[id]);
+          console.log(id);
+          uiOuter.css("box-shadow", "none");
+          //flasher(padId);
+          uiPads.delay(500 * id).queue(function() {
+            $(this)
+              .addClass("selected")
+              .delay(500)
+              .queue(function() {
+              $(this).removeClass("selected");
+              $(this).dequeue();
+            });
+            $(this).dequeue();
+          });
+          uiLevel.html(level);
+        }, 2000);
+      });
+    }
+  }
 
   // looping through pads based on id
   $.each(index, function(i) {
     var uiPads = $(pads[i]);
-
     uiPads.click(function() {
       if (on) {
-        pushedPads.push(uiPads.html());
-        console.log(pushedPads);
+        userCollector.push(uiPads.html());
+        userPick = userCollector[userCollector.length - 1];
+        console.log(userCollector);
+        console.log(userPick);
+        console.log(aiPick);
         uiOuter.css("box-shadow", "inset 0px 0px 75px 10px rgba(0, 0, 0, 1)");
+        if (aiPick == userPick) {
+          startGame();
+        };
       }
     });
   });
 
-  
+  uiStart.click(function() {
+    startGame();
+  });
+
+
