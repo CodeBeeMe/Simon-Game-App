@@ -1,8 +1,8 @@
-<!-- !Date:19.12.2017 Copyright ©2017 HTML code by Cătălin Anghel-Ursu @Madness2aMaze (https://codepen.io/Madness2aMaze)
+<!-- !Date:19.12.2017 Copyright ©2017-2018 HTML code by Cătălin Anghel-Ursu @Madness2aMaze (https://codepen.io/Madness2aMaze)
 - All Rights Reserved!
 MIT License
 
-Copyright (c) 2017 Cătălin Anghel-Ursu (https://github.com/Madness2aMaze/Tic-Tac-Toe-Web-Game)
+Copyright (c) 2017-2018 Cătălin Anghel-Ursu (https://github.com/Madness2aMaze/Simon-Game-App)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -36,14 +36,38 @@ SOFTWARE. -->
     <div class="play-box text-center">
       <i class="play fa fa-play-circle" aria-hidden="true"></i>
     </div>
-    <div class="l-circle invisible">
-      
-      <div id="0" class="green pad">0</div>
-      <div id="1" class="red pad">1</div>
-      <div id="3" class="blue pad">3</div>
-      <div id="2" class="yellow pad">2</div>
-      
-      <div class="s-circle invisible">
+    <div class="outer invisible">
+
+      <div class="audio-shell">
+        <div id="0" class="green pad">0</div>
+        <audio preload="auto" class="track0">
+          <source src="https://goo.gl/4oLZh6" type="audio/mpeg"/>
+          <source src="https://goo.gl/9crK8o" type="audio/ogg"/>
+				</audio>
+      </div>
+      <div class="audio-shell">
+        <div id="1" class="red pad">1</div>
+        <audio preload="auto" class="track1">
+          <source src="https://goo.gl/KQms1G" type="audio/mpeg"/>
+          <source src="https://goo.gl/795htd" type="audio/ogg"/>
+				</audio>
+      </div>
+      <div class="audio-shell">
+        <div id="3" class="blue pad">3</div>
+        <audio preload="auto" class="track3">
+          <source src="https://goo.gl/5tpeXQ" type="audio/mpeg"/>
+          <source src="https://goo.gl/Hgzmvt" type="audio/ogg"/>
+				</audio>
+      </div>
+      <div class="audio-shell">
+        <div id="2" class="yellow pad">2</div>
+        <audio preload="auto" class="track2">
+          <source src="https://goo.gl/fbbUHm" type="audio/mpeg"/>
+          <source src="https://goo.gl/s4tXLb" type="audio/ogg"/>
+				</audio>
+      </div>      
+
+      <div class="inner invisible">
         <div class="title text-center">
           <div class="wrap justify-content-center">
             <div class="name">
@@ -57,7 +81,7 @@ SOFTWARE. -->
             <button class="button start">START</button>
           </div>
           <div class="col- display text-center invisible">
-            <p class="level">..</p>
+            <p class="level">00</p>
           </div>
           <div class="col- controls right-box">
             <button class="button strict">STRICT</button>
@@ -70,9 +94,10 @@ SOFTWARE. -->
       </div>
     </div>
   </div>
-    <div class="footer col align-self-end text-center">
-      <h5>Designed and coded by <a href="https://github.com/Madness2aMaze" target="_blank" title="©2017-2018 Cătălin Anghel-Ursu @Madness2aMaze - All Rights Reserved">Madness2aMaze &copy2017 - 2018 - All Rights Reserved</a> | <a href="http://codepen.io/Madness2aMaze/" title="More of my works" target="_blank"><i class="fa fa-codepen" id="icon-cpen" aria-hidden="true"></i></a> | <a href="https://www.freecodecamp.com/" target="_blank" title="FreeCodeCamp"><i class="fa fa-free-code-camp" id="icon-fcc" aria-hidden="true"></i></a> | <a href="https://github.com/Madness2aMaze" title="...to my github" target="_blank"><img src="https://avatars0.githubusercontent.com/u/24189991?s=460&v=4" class="img-fluid img-head" alt="portrait shot"></a></h5>
-    </div>
+  <div class="footer col align-self-end text-center">
+    <h5>Designed and coded by <a href="https://github.com/Madness2aMaze" target="_blank" title="©2017-2018 Cătălin Anghel-Ursu @Madness2aMaze - All Rights Reserved">Madness2aMaze &copy2017 - 2018 - All Rights Reserved</a> | <a href="http://codepen.io/Madness2aMaze/"
+        title="More of my works" target="_blank"><i class="fa fa-codepen" id="icon-cpen" aria-hidden="true"></i></a> | <a href="https://www.freecodecamp.com/" target="_blank" title="FreeCodeCamp"><i class="fa fa-free-code-camp" id="icon-fcc" aria-hidden="true"></i></a>      | <a href="https://github.com/Madness2aMaze" title="...to my github" target="_blank"><img src="https://avatars0.githubusercontent.com/u/24189991?s=460&v=4" class="img-fluid img-head" alt="portrait shot"></a></h5>
+  </div>
 </body>
 
 </html>
