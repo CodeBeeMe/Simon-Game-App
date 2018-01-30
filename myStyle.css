@@ -1,9 +1,9 @@
-/* !Date:19.12.2017 Copyright ©2017 CSS code by Cătălin Anghel-Ursu @Madness2aMaze (https://codepen.io/Madness2aMaze)
+/* !Date:19.12.2017 Copyright ©2017-2018 CSS code by Cătălin Anghel-Ursu @Madness2aMaze (https://codepen.io/Madness2aMaze)
 - All Rights Reserved!
 
 MIT License
 
-Copyright (c) 2017 Cătălin Anghel-Ursu (https://github.com/Madness2aMaze/Tic-Tac-Toe-Web-Game)
+Copyright (c) 2017-2018 Cătălin Anghel-Ursu (https://github.com/Madness2aMaze/Simon-Game-App)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -104,7 +104,7 @@ body {
   }
 }
 
-.l-circle {
+.outer {
   display: none;
   background-color: #333;
   margin: 0 auto;
@@ -113,9 +113,15 @@ body {
   width: 500px;
   border-radius: 100%;
   overflow: hidden;
+  transition: .3s;  
 }
 
-.s-circle {
+.outer-active {
+  transition: .3s;
+  box-shadow: inset 0px 0px 75px 10px rgba(0, 0, 0, 1);
+}
+
+.inner {
   position: absolute;
   background: radial-gradient(
     ellipse at center,
@@ -265,6 +271,7 @@ body {
     rgba(33, 180, 226, 1) 50%,
     rgba(183, 222, 237, 1) 100%
   );
+  cursor: default;
 }
 
 .strict {
@@ -276,6 +283,7 @@ body {
     rgba(252, 205, 77, 1) 49.8%,
     rgba(252, 234, 187, 1) 100%
   );
+  cursor: default;
 }
 
 .str-on {
@@ -290,6 +298,22 @@ body {
   margin-top: 10px;
   width: 45px;
   color: #ff1f00;
+}
+
+.blink {
+  animation: blinkAnim ease .7s;
+  animation-iteration-count: infinite;
+  transform-origin: 50% 50%;
+  animation-fill-mode: forwards;
+}
+
+@keyframes blinkAnim {  
+  0%, 100% {    
+    opacity: 1;
+  }
+  50% {    
+    opacity: 0;   
+  }  
 }
 
 .switch {
@@ -355,19 +379,13 @@ body {
   width: 250px;
   height: 250px;
   opacity: 1;
-  transition: .3s;
   overflow: hidden;
 }
 
-.pad:active {  
-  opacity: .1;
+.active {  
+  opacity: .1 !important;
   transition: .3s;
   transform: scale(.98, .98);
-}
-
-.selected {
-  opacity: .1;
-  transition: .3s;
 }
 
 .pad:focus {
