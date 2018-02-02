@@ -2,7 +2,7 @@
 
 - All Rights Reserved!
 
-//***My thanks and credit goes to Dan Purdy https://www.danpurdy.co.uk that inspired me to write the flasher function for my project***
+//***My thanks and credit goes to Dan Purdy https://www.danpurdy.co.uk  for inspiring me to write the flasher() function for my project***
 
 MIT License
 
@@ -184,7 +184,7 @@ $(document).ready(function() {
     sound.play();
   }
   //=====================================================================================================================================
-  //***My thanks and credit goes to Dan Purdy https://www.danpurdy.co.uk that inspired me to write the flasher function for my project***
+  //***My thanks and credit goes to Dan Purdy https://www.danpurdy.co.uk  for inspiring me to write the flasher() function for my project.***
   function flasher(el, times, speed, pad) { //flashes the coresponding pad based on the randomizer output
     if (times > 0) { //making sure the pads flash      
       soundBit(pad); //play the corresponding pad sound      
