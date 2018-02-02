@@ -384,7 +384,7 @@ body {
 
 .active {  
   opacity: .1 !important;
-  transition: .3s;
+  transition: .2s;
   transform: scale(.98, .98);
 }
 
