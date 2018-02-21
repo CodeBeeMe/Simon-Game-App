@@ -338,6 +338,23 @@ body {
   box-shadow: 2px 2px 7px 0px #111;
 }
 
+.glow {
+  animation-name: fade;
+  animation-duration: 2000ms;
+  animation-iteration-count: infinite;
+}
+
+@keyframes fade {
+  0%, 100% {
+    background: #fff;
+    box-shadow: 0px 0px 10px 0px #fff;
+  }
+  50% {
+    background: #4c4c4c;
+    box-shadow: 2px 2px 7px 0px #111;
+  }
+}
+
 .slide-r {
   animation: slideRight ease 0.5s;
   animation-iteration-count: 1;
