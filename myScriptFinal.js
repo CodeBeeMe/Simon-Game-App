@@ -2,7 +2,7 @@
 
 - All Rights Reserved!
 
-//***My thanks and credit goes to Dan Purdy https://www.danpurdy.co.uk  for inspiring me to write the flasher() function for my project***
+//***My thanks and credit goes to Dan Purdy https://www.danpurdy.co.uk for inspiring me to write the flasher() function for my project.***
 
 MIT License
 
@@ -71,6 +71,7 @@ $(document).ready(function() {
     uiPlayBox.css("opacity", ".5");
     uiPlay.css("transform", "scale(1.2, 1.2)");
     uiPlay.css("opacity", ".5");
+    uiOnOff.addClass("glow");
 
     setTimeout(function() {
       uiPlayBox.css("display", "none");
@@ -116,9 +117,12 @@ $(document).ready(function() {
     difficulty = 20;
     aiCollector = [];
     userCollector = [];
-    uiLevel.html("00");
+    uiLevel.html("00");    
     uiOnOff.addClass("slide-l");
-    uiPad.removeClass("active");
+    setTimeout(() => {
+      uiOnOff.removeClass("slide-l"); 
+    }, 1000);
+    uiPad.removeClass("active");    
     uiOnOff.removeClass("slide-r");
     uiLevel.removeClass("zoom-in");
     uiStrict.removeClass("str-on");
@@ -127,6 +131,7 @@ $(document).ready(function() {
     uiStart.css("cursor", "default");
     uiStrict.css("cursor", "default");
     uiSwitch.css("background", "#f44242");
+    uiOnOff.addClass("glow");
   }
   
   function toggleOffToOn() { //switching the game ON
@@ -134,9 +139,10 @@ $(document).ready(function() {
     aiCollector = [];
     userCollector = [];
     uiLevel.html("00");
+    uiOnOff.removeClass("glow");
     uiLevel.addClass("zoom-in");
     uiOnOff.addClass("slide-r");
-    uiOnOff.removeClass("slide-l");
+    uiOnOff.removeClass("slide-l");    
     setTimeout(function() {
       uiLevel.removeClass("zoom-in");
     }, 1000);
@@ -184,7 +190,7 @@ $(document).ready(function() {
     sound.play();
   }
   //=====================================================================================================================================
-  //***My thanks and credit goes to Dan Purdy https://www.danpurdy.co.uk  for inspiring me to write the flasher() function for my project.***
+  //***My thanks and credit goes to Dan Purdy https://www.danpurdy.co.uk for inspiring me to write the flasher() function for my project***
   function flasher(el, times, speed, pad) { //flashes the coresponding pad based on the randomizer output
     if (times > 0) { //making sure the pads flash      
       soundBit(pad); //play the corresponding pad sound      
@@ -298,6 +304,8 @@ $(document).ready(function() {
     
     for (var i = 0; i < checker; i++) {
       if (aStr.charAt(i) !== bStr.charAt(i)) {
+        active = false;
+        uiPad.css("cursor", "default");
         lvlBlinker(2);
         //if incorrect to be notified using a frown icon and call the lastSequence()
         uiLevel.html("<i class='fa fa-frown-o' aria-hidden='true'></i>");
@@ -310,6 +318,8 @@ $(document).ready(function() {
           setTimeout(function() {
             repeatSequence(); //repeats the last recent code sequence
             userCollector = []; //clears the userCollector arr for a new user input
+            active = true;
+            uiPad.css("cursor", "pointer");
           }, 700 * (level / 2));
         }        
       }
